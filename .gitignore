@@ -20,6 +20,8 @@ chroma_db/
 .llm_cache/
 
 # --- OS / editor -------------------------------------------------------
+# Local Claude Code settings (a personal permission allow-list)
+.claude/
 .DS_Store
 Thumbs.db
 desktop.ini
