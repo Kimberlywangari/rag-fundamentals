@@ -27,6 +27,7 @@ COLLECTION_NAME = "kenya_law"
 CHUNK_STRATEGY = "fixed"  # "fixed" | "structure"
 CHUNK_SIZE = 1000  # characters
 CHUNK_OVERLAP = 200  # characters
+STRUCTURE_MAX_SIZE = 1500  # characters; structure strategy splits only sections longer than this
 
 # --- Retrieval ---------------------------------------------------------------
 TOP_K = 5
