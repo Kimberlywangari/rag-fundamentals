@@ -1,0 +1,21 @@
+# Pinned for reproducibility. Tested on Python 3.13 (Windows 11).
+# Python 3.14 is NOT recommended: torch / onnxruntime wheels lag new releases.
+
+# --- LLM (Google Gemini, free tier) ---
+google-genai==2.29.0
+python-dotenv==1.2.4
+
+# --- Embeddings (local) + vector store ---
+sentence-transformers==6.1.0
+torch==2.14.1
+chromadb==1.5.9
+numpy==2.5.4
+
+# --- PDF ingestion ---
+pymupdf==1.28.2
+# OCR fallback for the few PDF lines that are drawn as vector outlines, not text
+rapidocr==3.10.0
+onnxruntime==1.31.0
+
+# --- Tests ---
+pytest==9.1.1
