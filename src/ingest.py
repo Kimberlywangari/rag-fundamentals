@@ -311,14 +311,22 @@ def ingest_pdf(pdf_path: Path, ocr: bool = True) -> Document:
         notes = [ln for ln in cleaned if ln.x0 > right_edge + MARGIN_GAP]
 
         rows = []
+        page_toc_rows = 0
         for row in _merge_rows(body):
-            # Regulations contents row, e.g. "51 Prior consultation." (real body rows read "51. ").
-            if TOC_ROW_NO_DOT.match(row.text) and row.x0 < 140 and row.text.endswith(".") and len(row.text) < 90:
-                stats["toc_rows_removed"] += 1
+            # Regulations contents row, e.g. "51 Prior consultation" (real body rows read "51. ").
+            if TOC_ROW_NO_DOT.match(row.text) and row.x0 < 140 and len(row.text) < 110:
+                page_toc_rows += 1
             elif TOC_HEADING.match(row.text):
-                stats["toc_rows_removed"] += 1
+                page_toc_rows += 1
             else:
                 rows.append(row)
+        stats["toc_rows_removed"] += page_toc_rows
+        if page_toc_rows >= 5 and sum(len(r.text) for r in rows) < 450:
+            # what is left of a contents page is only its Part headings: drop the page text
+            page.warnings.append("contents page dropped")
+            stats["contents_pages_dropped"] += 1
+            page.lines = []
+            continue
         if BOILERPLATE.search(" ".join(r.text for r in rows)):
             page.warnings.append("licence / cover boilerplate page dropped")
             stats["boilerplate_pages_dropped"] += 1
