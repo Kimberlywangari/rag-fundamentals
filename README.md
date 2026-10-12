@@ -80,6 +80,7 @@ Useful stages on their own:
 | `python -m src.retrieve "<query>" -k 5` | retrieval only |
 | `python -m eval.eval_set` | re-verifies every evaluation question against the PDFs |
 | `python -m eval.chunking_experiment` | the chunk size/overlap experiment (28 configurations, ~6 min) |
+| `python -m eval.strategy_end_to_end` | fixed vs structure-aware chunks, judged on final answers (needs the API key) |
 | `python -m eval.calibrate_threshold` | score distribution behind the similarity guard |
 | `python -m eval.make_results_md` | regenerates `docs/RESULTS.md` from the last live run |
 
