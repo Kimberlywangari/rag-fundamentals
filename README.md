@@ -1,5 +1,7 @@
 # RAG Fundamentals: Kenyan data-protection and cybercrime law
 
+[![tests](https://github.com/Kimberlywangari/rag-fundamentals/actions/workflows/tests.yml/badge.svg)](https://github.com/Kimberlywangari/rag-fundamentals/actions/workflows/tests.yml)
+
 A from-scratch Retrieval-Augmented Generation (RAG) pipeline that answers questions about three
 Kenyan legal texts and **shows its evidence**: the ranked passages (with similarity score, source
 and page) and an answer that cites them, or an explicit "insufficient evidence" when the
