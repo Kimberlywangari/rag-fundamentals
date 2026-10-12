@@ -155,10 +155,10 @@ worked example:
 
 Honest properties of this model: it is small and fast but **lexically noisy**. The question
 "general penalty for an offence with no specific penalty" scored the exact section 73 chunk at
-0.585, below four other penalty/liability passages at 0.63-0.68, so with section-sized chunks
-the right passage fell out of the top 10 (fixed windows happened to bundle it with
-"offence" language from section 72 and ranked it first). That is an embedding effect, not a
-chunking bug.
+0.585, below the five penalty/liability passages it returned (0.63-0.68), so with
+section-sized chunks the right passage fell out of the top 10 (fixed windows happened to bundle
+it with "offence" language from section 72 and ranked it 1st-2nd). That is an embedding
+effect, not a chunking bug.
 
 ## 5. Vector storage (ChromaDB)
 
