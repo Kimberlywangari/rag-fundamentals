@@ -31,7 +31,7 @@ You need Python **3.13** (3.14 is too new for the `torch`/`onnxruntime` wheels),
 for PyTorch, and internet access for the first run.
 
 ```powershell
-git clone <this-repo-url>
+git clone https://github.com/Kimberlywangari/rag-fundamentals.git
 cd rag-fundamentals
 
 py -3.13 -m venv .venv
@@ -44,7 +44,8 @@ Copy-Item .env.example .env           # macOS/Linux: cp .env.example .env
 
 * **API key:** free from Google AI Studio, <https://aistudio.google.com/apikey>. It is read from
   `.env` (git-ignored) through `python-dotenv`; the code never prints or logs it.
-* **PDFs:** already committed in `data/raw/`. To obtain fresh copies, the Acts are published by
+* **PDFs:** already committed in `data/raw/` (provenance, versions and licence:
+  [data/README.md](data/README.md)). To obtain fresh copies, the Acts are published by
   Kenya Law (<https://kenyalaw.org>; each PDF prints its own identifier, e.g.
   `/akn/ke/act/2019/24/eng@2022-12-31`) and the Regulations are Kenya Gazette Supplement No. 236
   of 31 December 2021, also available from the Office of the Data Protection Commissioner. Keep
