@@ -229,7 +229,12 @@ def _find_segments(lines: list[_Line], unit_word: str) -> list[_Segment]:
             ok = (n == last_num and bool(suffix)) or (last_num < n <= last_num + SKIPPED_NUMBERS_ALLOWED)
             if ok:
                 has_note = idx > 0 and lines[idx - 1].kind == "note"
-                title = lines[idx - 1].text if has_note else (rest if len(rest) <= MAX_TITLE_CHARS else "")
+                if has_note:
+                    title = lines[idx - 1].text
+                elif unit_word == "Section" and len(rest) <= MAX_TITLE_CHARS:
+                    title = rest  # Acts print the heading on the number's own row
+                else:
+                    title = ""  # a regulation row is body text, not a heading
                 title = title.rstrip(".")
                 close((idx - 1) - (1 if has_note else 0))
                 label = f"{unit_word} {n}{suffix}" + (f": {title}" if title else "")
