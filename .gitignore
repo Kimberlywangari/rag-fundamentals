@@ -1,0 +1,27 @@
+# --- Secrets -----------------------------------------------------------
+# The real API key lives in .env and must never be committed.
+.env
+.env.*
+# ...but the placeholder template IS committed so others know what to set.
+!.env.example
+
+# --- Python ------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# --- Generated artefacts (rebuilt from data/raw by the pipeline) -------
+# Persistent ChromaDB vector store
+chroma_db/
+# Local cache of Gemini responses (saves free-tier quota)
+.llm_cache/
+
+# --- OS / editor -------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
