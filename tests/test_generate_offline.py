@@ -26,8 +26,8 @@ def chunk(rank: int, score: float, text: str = "A data controller shall act.") -
 
 
 class ApiError(Exception):
-    def __init__(self, code: int):
-        super().__init__(f"HTTP {code}")
+    def __init__(self, code: int, message: str = ""):
+        super().__init__(f"HTTP {code} {message}".strip())
         self.code = code
 
 
@@ -127,6 +127,14 @@ def test_rate_limit_429_is_retried(tmp_path):
     assert client.calls == ["m1", "m1"]
 
 
+def test_rate_limit_waits_as_long_as_the_server_asked(tmp_path):
+    gen, client, sleeps = make_generator(
+        [ApiError(429, "Quota exceeded. Please retry in 23.4s."), "fine [1]"], tmp_path
+    )
+    assert gen.answer("q", [chunk(1, 0.9)], min_score=0.5).text == "fine [1]"
+    assert sleeps and sleeps[0] >= 23.4  # not the 1-2 s a plain backoff would use
+
+
 def test_falls_back_to_next_model_after_exhausting_retries(tmp_path):
     script = [ApiError(503)] * 3 + ["from fallback [1]"]
     gen, client, _ = make_generator(script, tmp_path, max_attempts=3)
@@ -145,6 +153,18 @@ def test_raises_when_every_model_fails(tmp_path):
     gen, _, _ = make_generator([ApiError(503)] * 6, tmp_path, max_attempts=3)
     with pytest.raises(GenerationError):
         gen.answer("q", [chunk(1, 0.9)], min_score=0.5)
+
+
+def test_failing_model_is_skipped_during_cooldown_then_retried(tmp_path):
+    clock = {"t": 0.0}
+    client = ScriptedClient([ApiError(503)] * 3 + ["a [1]", "b [1]", "c [1]"])
+    gen = Generator(client=client, models=("m1", "m2"), cache_dir=tmp_path, max_attempts=3,
+                    base_delay=1.0, sleep=lambda s: None, cooldown_s=100.0, clock=lambda: clock["t"])
+    assert gen.answer("one", [chunk(1, 0.9)], min_score=0.5).model == "m2"
+    assert gen.answer("two", [chunk(1, 0.9)], min_score=0.5).model == "m2"
+    assert client.calls == ["m1", "m1", "m1", "m2", "m2"]  # m1 not retried for the 2nd question
+    clock["t"] = 101.0  # cooldown over: the primary is tried again
+    assert gen.answer("three", [chunk(1, 0.9)], min_score=0.5).model == "m1"
 
 
 def test_second_identical_call_is_served_from_the_cache(tmp_path):

@@ -107,6 +107,8 @@ class Generator:
         base_delay: float = 2.0,
         request_timeout_s: float = 30.0,
         sleep: Callable[[float], None] = time.sleep,
+        cooldown_s: float = 300.0,
+        clock: Callable[[], float] = time.monotonic,
     ):
         self._client = client
         self.models = models or (config.GEMINI_MODEL, *config.GEMINI_FALLBACK_MODELS)
@@ -115,6 +117,11 @@ class Generator:
         self.base_delay = base_delay
         self.request_timeout_s = request_timeout_s
         self._sleep = sleep
+        # circuit breaker: a model that just failed all its retries is skipped for a while,
+        # so one overloaded model does not cost ~90 s on every single question
+        self.cooldown_s = cooldown_s
+        self._clock = clock
+        self._unhealthy_until: dict[str, float] = {}
 
     # -- client / API -------------------------------------------------------------
     @property
@@ -139,6 +146,12 @@ class Generator:
     def _status(exc: Exception) -> int | None:
         return getattr(exc, "code", None) or getattr(exc, "status_code", None)
 
+    @staticmethod
+    def _retry_hint(exc: Exception) -> float | None:
+        """Seconds the server asked us to wait ("Please retry in 12.3s", "retryDelay": "12s")."""
+        m = re.search(r"retry(?:Delay|\s+in)\D{0,15}([\d.]+)\s*s", str(exc), flags=re.IGNORECASE)
+        return float(m.group(1)) if m else None
+
     def _call_with_retry(self, model: str, system: str | None, user: str) -> tuple[str, int]:
         """One model, bounded exponential backoff on 429/5xx/timeouts. Returns (text, attempts)."""
         from google.genai import types
@@ -160,6 +173,10 @@ class Generator:
                     raise
                 if attempt < self.max_attempts:
                     delay = self.base_delay * (2 ** (attempt - 1)) * (0.75 + 0.5 * random.random())
+                    if status == 429:
+                        # a quota is per minute: a 2 s retry just burns an attempt. Wait as long
+                        # as the server asked (or a sensible minimum), capped.
+                        delay = min(max(delay, self._retry_hint(exc) or 10.0), 65.0)
                     self._sleep(delay)
         raise GenerationError(f"{model}: gave up after {self.max_attempts} attempts: {last}") from last
 
@@ -173,11 +190,15 @@ class Generator:
             data = json.loads(path.read_text(encoding="utf-8"))
             return data["text"], data["model"], 0, True
 
+        now = self._clock()
+        healthy = [m for m in self.models if self._unhealthy_until.get(m, 0.0) <= now]
         total_attempts, errors = 0, []
-        for model in self.models:
+        # if every model is cooling down, try them all anyway rather than fail outright
+        for model in healthy or list(self.models):
             try:
                 text, attempts = self._call_with_retry(model, system, user)
                 total_attempts += attempts
+                self._unhealthy_until.pop(model, None)
                 if use_cache:
                     self.cache_dir.mkdir(parents=True, exist_ok=True)
                     path.write_text(
@@ -186,6 +207,7 @@ class Generator:
                 return text, model, total_attempts, False
             except Exception as exc:  # noqa: BLE001 - try the next model
                 total_attempts += self.max_attempts
+                self._unhealthy_until[model] = self._clock() + self.cooldown_s
                 errors.append(f"{model}: {type(exc).__name__}: {str(exc)[:120]}")
         raise GenerationError("all models failed: " + " | ".join(errors))
 
