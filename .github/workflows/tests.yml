@@ -1,0 +1,33 @@
+name: tests
+
+# Offline checks only: no API key, no model download, no PyTorch.
+# The live tests (`pytest --live`) call Gemini and are run by hand.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # The pinned versions from requirements.txt that the offline suite needs. The embedding
+      # model, PyTorch and OCR are lazily imported and not needed here.
+      - name: Install dependencies
+        run: >
+          python -m pip install
+          pymupdf==1.28.2 chromadb==1.5.9 numpy==2.5.4
+          python-dotenv==1.2.4 google-genai==2.29.0 pytest==9.1.1
+
+      - name: Unit tests (chunking, retrieval, ingestion, generation guard/retry/cache)
+        run: python -m pytest -q
+
+      # Every expected answer must still be found, verbatim, on the page it claims.
+      - name: Verify evaluation questions against the PDFs
+        run: python -m eval.eval_set
