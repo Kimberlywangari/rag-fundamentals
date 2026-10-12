@@ -91,9 +91,15 @@ def get_client(path: Path | str | None = None) -> chromadb.ClientAPI:
     return chromadb.PersistentClient(path=str(target), settings=Settings(anonymized_telemetry=False))
 
 
-def create_collection(client: chromadb.ClientAPI, name: str = config.COLLECTION_NAME, reset: bool = True):
+def create_collection(
+    client: chromadb.ClientAPI,
+    name: str = config.COLLECTION_NAME,
+    reset: bool = True,
+    metadata: dict | None = None,
+):
     """Create a cosine-space collection. ``embedding_function=None``: we always supply vectors,
-    so Chroma can never silently embed with a different model."""
+    so Chroma can never silently embed with a different model.  ``metadata`` is stored with
+    the collection (the pipeline uses it to detect an index built with an older config)."""
     if reset:
         try:
             client.delete_collection(name)
@@ -103,6 +109,7 @@ def create_collection(client: chromadb.ClientAPI, name: str = config.COLLECTION_
         name=name,
         configuration={"hnsw": {"space": "cosine"}},
         embedding_function=None,
+        metadata=metadata or None,
     )
 
 
@@ -129,9 +136,10 @@ def build_index(
     client: chromadb.ClientAPI | None = None,
     name: str = config.COLLECTION_NAME,
     reset: bool = True,
+    metadata: dict | None = None,
 ):
     client = client or get_client()
-    collection = create_collection(client, name, reset=reset)
+    collection = create_collection(client, name, reset=reset, metadata=metadata)
     add_chunks(collection, chunks, embedder)
     return collection
 
