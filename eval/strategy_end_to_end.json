@@ -1,0 +1,270 @@
+{
+  "fixed 1000/200": {
+    "dpa-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "A data controller must notify the Data Commissioner without delay, within seventy-two hours of becoming aware of the breach [1]."
+    },
+    "dpa-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "Where the notification to the Data Commissioner is not made within seventy-two hours, it shall be accompanied by reasons for the delay [1]."
+    },
+    "dpa-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "The maximum administrative fine that may be imposed by the Data Commissioner in a penalty notice is up to five million shillings, or in the case of an undertaking, up to one per centum of its annual turnover of the preceding financial year, whichever is lower [1]."
+    },
+    "dpa-04": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "Under section 73(1), a person convicted of an offence for which no specific penalty is provided is liable to a fine not exceeding three million shillings or to an imprisonment term not exceeding ten years, or to both [2]."
+    },
+    "dpa-05": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "The Data Commissioner is appointed for a single term of six years and is not eligible for re-appointment [1]."
+    },
+    "dpa-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "Data impact assessment reports must be submitted sixty days prior to the processing of data [3]."
+    },
+    "dpa-07": {
+      "correct": false,
+      "declined": true,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "INSUFFICIENT EVIDENCE: The provided passages do not state who bears the burden of proof regarding whether a person agreed to the processing of their personal data."
+    },
+    "dpa-08": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data subject has the right to:\n*   Be informed of the use to which their personal data is to be put [2].\n*   Access their personal data in the custody of a data controller or data processor [2].\n*   Object to the processing of all or part of their personal data [2].\n*   Correction of false or misleading data [2].\n*   Deletion of false or misleading data about them [2].\n*   Receive personal data concerning them in a structured, commonly used, and machine-readable format [3].\n*   Transmit the data obtained under the right to data portability to another data controller [3]."
+    },
+    "dpa-09": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A complaint made to the Data Commissioner shall be investigated and concluded within ninety days [1]."
+    },
+    "reg-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller or data processor must comply with a request by a data subject to access their personal data within seven days of the request [1][2]."
+    },
+    "reg-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller or data processor shall rectify an entry of personal data within fourteen days of the request [1][2]."
+    },
+    "reg-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A person who uses personal data for commercial purposes without the consent of the data subject is liable, on conviction, to a fine not exceeding twenty thousand shillings or to a term of imprisonment not exceeding six months, or to both [4]."
+    },
+    "reg-04": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Processing may commence if the data controller or data processor does not receive any communication from the Data Commissioner within sixty days of submitting the data protection impact assessment report [1]."
+    },
+    "reg-05": {
+      "correct": false,
+      "declined": true,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "INSUFFICIENT EVIDENCE: The provided passages do not contain a definition for the term \"transferring entity.\""
+    },
+    "reg-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Consent is not considered to have been given freely if:\n* It is presumed based on the data subject not objecting to a proposal to process their personal data in a particular manner [1].\n* It is presented as a non-negotiable part of the terms and conditions for processing [1][3].\n* The data subject is unable to refuse or withdraw their consent without detriment [1][3].\n* The data controller or data processor merges several purposes for processing without seeking specific consent for each purpose [1][3].\n* The intention of the data subject is ambiguous [3].\n* The performance of a contract or service is conditional on consent to the processing of personal data that is not necessary for the performance of that contract [2]."
+    },
+    "reg-07": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The Cabinet Secretary can grant a certificate of exemption to a data controller or data processor who processes personal data for national security [1]."
+    },
+    "cmca-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The operator of a computer system or network must inform the Committee of any attacks, intrusions, or disruptions within twenty four hours [1]."
+    },
+    "cmca-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "Under section 27(2) of the Computer Misuse and Cybercrimes Act, a person convicted of cyber harassment is liable to a fine not exceeding twenty million shillings or to imprisonment for a term not exceeding ten years, or to both [1]."
+    },
+    "cmca-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.6-flash",
+      "answer": "A body corporate that commits an offence under the Act is liable, on conviction, to a fine not exceeding fifty million shillings [2]."
+    },
+    "cmca-04": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The Director is appointed for a single term of four years and is not eligible for reappointment [1]."
+    },
+    "cmca-05": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A person who commits an offence under sections 16 (unauthorised interference) or 17 (unauthorised interception) on a protected computer system is liable, on conviction, to a fine not exceeding twenty five million shillings or imprisonment for a term not exceeding twenty years, or both [5].\n\nINSUFFICIENT EVIDENCE: The provided passages do not specify the penalty for unauthorised access to a protected computer system under section 14 or 15."
+    },
+    "cmca-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A person convicted of phishing is liable to a fine not exceeding three hundred thousand shillings [1][5]."
+    }
+  },
+  "structure max 1200": {
+    "dpa-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller must notify the Data Commissioner within seventy-two hours of becoming aware of a breach [1]."
+    },
+    "dpa-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Where the notification to the Data Commissioner is not made within seventy-two hours, it must be accompanied by reasons for the delay [1]."
+    },
+    "dpa-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The maximum administrative fine is up to five million shillings, or in the case of an undertaking, up to one per centum of its annual turnover of the preceding financial year, whichever is lower [1]."
+    },
+    "dpa-04": {
+      "correct": false,
+      "declined": true,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "INSUFFICIENT EVIDENCE: The provided passages do not state a general penalty for offences under the Data Protection Act that lack a specific penalty."
+    },
+    "dpa-05": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The Data Commissioner is appointed for a single term of six years and is not eligible for re-appointment [3]."
+    },
+    "dpa-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Data protection impact assessment reports must be submitted sixty days prior to the processing of data [2]."
+    },
+    "dpa-07": {
+      "correct": false,
+      "declined": true,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "INSUFFICIENT EVIDENCE: The provided passages do not state who bears the burden of proof regarding whether a person agreed to the processing of their personal data."
+    },
+    "dpa-08": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data subject has the right to:\n(a) be informed of the use to which their personal data is to be put;\n(b) access their personal data in the custody of a data controller or data processor;\n(c) object to the processing of all or part of their personal data;\n(d) the correction of false or misleading data; and\n(e) the deletion of false or misleading data about them [1]."
+    },
+    "dpa-09": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A complaint made to the Data Commissioner shall be investigated and concluded within ninety days [1]."
+    },
+    "reg-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller or data processor must comply with a request by a data subject to access their personal data within seven days of the request [1]."
+    },
+    "reg-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller or data processor must rectify an entry of personal data within fourteen days of the request, provided they are satisfied that the rectification is necessary [1]."
+    },
+    "reg-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A data controller or data processor who uses personal data for commercial purposes without the consent of the data subject is liable, on conviction, to a fine not exceeding twenty thousand shillings or to a term of imprisonment not exceeding six months, or to both [2]."
+    },
+    "reg-04": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Processing may commence if the data controller or data processor does not receive any communication from the Data Commissioner within sixty days of submitting the data protection impact assessment report [1]."
+    },
+    "reg-05": {
+      "correct": false,
+      "declined": true,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "INSUFFICIENT EVIDENCE: The provided passages do not contain a definition for the term \"transferring entity.\""
+    },
+    "reg-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "Consent is not considered to have been given freely if:\n\n*   It is presumed based on the data subject not objecting to a proposal to process their personal data in a particular manner [2].\n*   It is presented as a non-negotiable part of the terms and conditions for processing [2].\n*   The data subject is unable to refuse or withdraw their consent without detriment [2].\n*   The data controller or data processor merges several purposes for processing without seeking specific consent for each purpose [2].\n*   The intention of the data subject is ambiguous [2].\n*   The performance of a contract or provision of a service is conditional on consent to the processing of personal data that is not necessary for the performance of that contract [1]."
+    },
+    "reg-07": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The Cabinet Secretary can grant an exemption to a data controller or data processor who processes personal data for national security, upon being satisfied that the grounds supporting the application are sufficient [2]."
+    },
+    "cmca-01": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The operator of a computer system or network must inform the Committee of any attacks, intrusions, or disruptions within twenty-four hours [1]."
+    },
+    "cmca-02": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The maximum penalty for cyber harassment is a fine not exceeding twenty million shillings or imprisonment for a term not exceeding ten years, or both [1]."
+    },
+    "cmca-03": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A body corporate that commits an offence under the Computer Misuse and Cybercrimes Act is liable, on conviction, to a fine not exceeding fifty million shillings [5]."
+    },
+    "cmca-04": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "The Director is appointed for a single term of four years and is not eligible for reappointment [2]."
+    },
+    "cmca-05": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A person who commits an offence under sections 14, 16, or 17 on a protected computer system is liable, on conviction, to a fine not exceeding twenty five million shillings or imprisonment for a term not exceeding twenty years, or to both [5]."
+    },
+    "cmca-06": {
+      "correct": true,
+      "declined": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "A person convicted of phishing is liable to a fine not exceeding three hundred thousand shillings [1]."
+    }
+  }
+}
