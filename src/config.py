@@ -19,6 +19,13 @@ CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 LLM_CACHE_DIR = PROJECT_ROOT / ".llm_cache"
 EVAL_DIR = PROJECT_ROOT / "eval"
 
+# Human-readable names used in prompts, citations and demo output.
+DOCUMENT_TITLES = {
+    "Computer Misuse and Cybercrimes.pdf": "Computer Misuse and Cybercrimes Act (Cap. 79C)",
+    "Data Protection Act.pdf": "Data Protection Act, 2019 (Cap. 411C)",
+    "THE-DATA-PROTECTION-GENERAL-REGULATIONS-2021-1.pdf": "Data Protection (General) Regulations, 2021",
+}
+
 # --- Embeddings --------------------------------------------------------------
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # local, 384-dim, max 256 word-pieces per input
 COLLECTION_NAME = "kenya_law"
@@ -36,6 +43,13 @@ STRUCTURE_MAX_SIZE = 1200  # characters; best structure variant (MRR 0.653, 3% t
 
 # --- Retrieval ---------------------------------------------------------------
 TOP_K = 5
+# Guard: if the best chunk scores below this cosine similarity the LLM is not called and the
+# answer is "insufficient evidence". Calibrated by `python -m eval.calibrate_threshold`:
+# answerable questions score >= 0.570 (22 of 22 pass at 0.50, margin 0.07); clearly off-topic
+# queries score < 0.50 (7 of 12 calibration negatives blocked). Near-domain negatives (another
+# country's privacy law) score up to 0.61, ABOVE some valid questions, so no threshold can
+# catch them: the prompt rule is the defence for those. Kept low to avoid false refusals.
+MIN_SIMILARITY = 0.50
 
 # --- Generation (Gemini) -----------------------------------------------------
 # Best free-tier model per https://ai.google.dev/gemini-api/docs/pricing (checked 2026-10-12).
