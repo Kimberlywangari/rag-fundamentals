@@ -23,11 +23,16 @@ EVAL_DIR = PROJECT_ROOT / "eval"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # local, 384-dim, max 256 word-pieces per input
 COLLECTION_NAME = "kenya_law"
 
-# --- Chunking (PROVISIONAL: replaced with evidence-based values in piece 10) --
+# --- Chunking: chosen by experiment, see eval/chunking_results.md -------------
+# fixed 1000/200 had the best MRR (0.724) and hit@5 (0.91) of 28 configurations. 1000 chars is
+# the largest size fully inside the embedding model's 256-token input (0% truncated; 1200+
+# truncates 15-99%); 20% overlap restores 100% answer coverage (0 overlap: 95%) and is clearly
+# better than none (+0.22 MRR, 95% CI [+0.07, +0.38]). "structure" is a statistically
+# indistinguishable alternative (MRR 0.653) that adds section labels.
 CHUNK_STRATEGY = "fixed"  # "fixed" | "structure"
 CHUNK_SIZE = 1000  # characters
 CHUNK_OVERLAP = 200  # characters
-STRUCTURE_MAX_SIZE = 1500  # characters; structure strategy splits only sections longer than this
+STRUCTURE_MAX_SIZE = 1200  # characters; best structure variant (MRR 0.653, 3% truncated)
 
 # --- Retrieval ---------------------------------------------------------------
 TOP_K = 5
